@@ -88,7 +88,15 @@ public class ClasePersona {
     public String getRangoIMC() {
         return rangoIMC;
     }
-    
+
+    public void setIMC(float IMC) {
+        this.IMC = IMC;
+    }
+
+    public void setRangoIMC(String rangoIMC) {
+        this.rangoIMC = rangoIMC;
+    }
+
     
    
     // string por defecto
@@ -144,7 +152,7 @@ public class ClasePersona {
         if (this.IMC < 18.5) {
             rangoIMC = "Bajo de peso";
         } else if (this.IMC >= 18.5 && this.IMC < 25) {
-            rangoIMC = "Peso Noramal";
+            rangoIMC = "Peso Normal";
         } else if (this.IMC >= 25 && this.IMC < 30) {
             rangoIMC = "Sobrepeso";
         } else if (this.IMC >= 30) {

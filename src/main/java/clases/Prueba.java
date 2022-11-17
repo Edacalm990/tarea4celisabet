@@ -33,8 +33,8 @@ public class Prueba {
         
         // mostrar el IMC y en que rango se encuentra con el método get
         System.out.println("""
-                           %s tiene un IMC de %f y tiene %s
-                           %s tiene un IMC de %f y tiene %s
+                           %s tiene un IMC de %f y tiene "%s"
+                           %s tiene un IMC de %f y tiene "%s"
                            """.formatted(persona1.getNombre(), persona1.getIMC(), persona1.getRangoIMC(),
                                    persona2.getNombre(), persona2.getIMC(), persona2.getRangoIMC()));
         

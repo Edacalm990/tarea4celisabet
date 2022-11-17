@@ -27,8 +27,8 @@ public class ServicioPersona {
         persona.setPeso(pedirPeso());
         persona.setAltura(pedirAltura());
         // en este caso no hay que llamar a ningún método se la clase Serivicio sino a un método de la propia clase
-        persona.calcularIMC();
-        persona.getRangoIMC();
+        persona.setIMC(persona.calcularIMC());
+        persona.setRangoIMC(persona.rangoIMC());
         // devuelve el objeto persona
         return persona;
     }
