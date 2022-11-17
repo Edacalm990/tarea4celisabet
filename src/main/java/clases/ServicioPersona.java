@@ -11,37 +11,41 @@ import java.util.Scanner;
  *
  * @author Usuario
  */
+// clase ServicioPersona que será la encargada de pedir los datos por Scanner y crear el objeto ClasePersona
 public class ServicioPersona {
-
+    
     public static Scanner teclado = new Scanner(System.in);
-
+    
     public static ClasePersona persona() {
 
-        char sexo;
-        double peso = 0.0;
-        double altura = 0;
-
         ClasePersona persona = new ClasePersona();
-
+        
+        // realiza todos los sets llamando al método correspondiente
         persona.setNombre(pedirNombre());
         persona.setSexo(pedirSexo());
         persona.setEdad(pedirEdad());
         persona.setPeso(pedirPeso());
         persona.setAltura(pedirAltura());
-
+        // en este caso no hay que llamar a ningún método se la clase Serivicio sino a un método de la propia clase
+        persona.calcularIMC();
+        persona.getRangoIMC();
+        // devuelve el objeto persona
         return persona;
     }
 
+    // pide el nombre
     private static String pedirNombre() {
         System.out.println("¿Como te llamas?");
         return teclado.nextLine();
     }
 
+    // pide un sexo y selecciona el primer carcater y lo transforma en un char ya que no hay un next especifico para char
     private static char pedirSexo() {
         System.out.println("¿Cual es tu sexo?");
         return teclado.next().toUpperCase().charAt(0);
     }
 
+    // se pide la edad y solo se pasa el parámetro si se ajusta a algo real
     private static int pedirEdad() {
         int edad = -1;
         do {
@@ -60,7 +64,8 @@ public class ServicioPersona {
         } while (edad < 0 || edad > 130);
         return edad;
     }
-
+    
+    // se pide eld y solo se pasa el parámetro si se ajusta a algo real
     private static double pedirPeso() {
         double peso = 0;
         do {
@@ -80,6 +85,7 @@ public class ServicioPersona {
         return peso;
     }
 
+    // se pide la altura y solo se pasa el parámetro si se ajusta a algo real
     private static double pedirAltura() {
         double altura = 0;
         do {

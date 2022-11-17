@@ -10,28 +10,33 @@ import java.util.Random;
  *
  * @author Usuario
  */
+// clase para crear persona
 public class ClasePersona {
 
+     // las variables son privadas para que solo se puedan cambiar con el setter o pedir con el getter
     private String nombre;
     private int edad;
-    final private String NIF = generaNIF(); // para que no se pueda modificar se pone un final
+    final private String NIF = generaNIF(); // se genera un NIF aleatorio y se restringe con el final
     private char sexo;
     private double peso;
     private double altura;
     private float IMC;
     private String rangoIMC;
 
+    // contructor con parametros
     public ClasePersona(String nombre, int edad, char sexo, double peso, double altura) {
         this.nombre = nombre;
         this.edad = edad;
-        this.sexo = filtrarSexo(sexo) ? sexo : 'O';
+        this.sexo = filtrarSexo(sexo) ? sexo : 'O'; // se comprueba la variable y se determina el valor
         this.peso = peso;
         this.altura = altura;
     }
-
+    
+    // constructor vacio
     public ClasePersona() {
     }
 
+    // getter y setter sin el set de NIF 
     public String getNombre() {
         return nombre;
     }
@@ -76,17 +81,24 @@ public class ClasePersona {
         return NIF;
     }
 
-    public String getNIF() {
-        return NIF;
+    public float getIMC() {
+        return IMC;
     }
-   
 
+    public String getRangoIMC() {
+        return rangoIMC;
+    }
+    
+    
+   
+    // string por defecto
     @Override
     public String toString() {
         return "ClasePersona{" + "nombre=" + nombre + ", edad=" + edad + ", nif=" + NIF + ", sexo=" + sexo
                 + ", peso=" + peso + ", altura=" + altura + '}';
     }
-
+    
+    // método para filtrar la variable sexo
     private boolean filtrarSexo(char sexo) {
         boolean resultado = switch (sexo) {
             case 'H' ->
@@ -99,6 +111,7 @@ public class ClasePersona {
         return resultado;
     }
 
+    // se genera un NIF aleatorio con su letra
     private String generaNIF() {
         Random random = new Random();
         int numeros = random.nextInt(99999999) + 00000001;
@@ -107,21 +120,25 @@ public class ClasePersona {
         String letra = LETRAS[posicion];
         return numeros + letra;
     }
-
+    
+    // método publico que determina si es mayor o menor de edad
     public boolean esMayorEdad() {
         return this.edad >= 18;
     }
 
+    // método público para calcular el IMC y almacenarla
     public float calcularIMC() {
         // IMC = Peso (kg) / altura (m)2
         this.IMC=(float) (this.peso / (Math.pow(this.altura, 2)));
         return IMC;
     }
-
+    
+    // método pública que llama a darLike de la clase serie y le añade un Like a la variable Like
     public void darLike(ClaseSerie serie) {
         serie.darLike();
     }
-
+    
+    // método público para determinar el estado del IMC
     public String rangoIMC() {
         String rangoIMC = "";
         if (this.IMC < 18.5) {

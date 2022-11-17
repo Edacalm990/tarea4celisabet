@@ -31,15 +31,20 @@ public class Prueba {
                                    persona1.getNombre(), persona1MayorEdad, 
                                    persona2.getNombre(), persona2MayorEdad));
         
-        
+        // mostrar el IMC y en que rango se encuentra con el método get
         System.out.println("""
                            %s tiene un IMC de %f y tiene %s
                            %s tiene un IMC de %f y tiene %s
-                           """);
+                           """.formatted(persona1.getNombre(), persona1.getIMC(), persona1.getRangoIMC(),
+                                   persona2.getNombre(), persona2.getIMC(), persona2.getRangoIMC()));
         
-        ClaseSerie simpson=new ClaseSerie("Los Simpson", "Comedia", "Familia Americana", "FOX", 27, 1000);
+        // creando una serie
+        ClaseSerie simpson=new ClaseSerie("Los Simpson", "Comedia", "Familia americana", "FOX", 26, 1000);
+        // mostrando la serie
         System.out.println(simpson);
+        // persona1 usa el método darLike de la ClasePersona que a su vez llama al método darLike de la ClaseSerie
         persona1.darLike(simpson);
+        // muestra la serie con el like añadido
         System.out.println(simpson);
         
     }
