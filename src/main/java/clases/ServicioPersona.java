@@ -4,77 +4,99 @@
  */
 package clases;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  *
  * @author Usuario
  */
-/*Clase ServicioPersona, que tiene un método para solicitar los datos de una persona por teclado y crear
-un objeto Persona, usando el constructor parametrizado.
-    private String nombre;
-    private int edad;
-    private String nif;
-    private String sexo;
-    private double peso;
-    private double altura;*/
 public class ServicioPersona {
 
     public static Scanner teclado = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        String nombre;
-        int edad = 0;
-        String nif;
-        char sexo='X';
-        double peso=0.0;
-        double altura;
-        boolean datoCorrecto=false;
+    public static ClasePersona persona() {
+
+        char sexo;
+        double peso = 0.0;
+        double altura = 0;
 
         ClasePersona persona = new ClasePersona();
-        
-        System.out.println("¿Como te llamas?");
-        nombre = teclado.nextLine();
-        persona.setNombre(nombre);
 
+        persona.setNombre(pedirNombre());
+        persona.setSexo(pedirSexo());
+        persona.setEdad(pedirEdad());
+        persona.setPeso(pedirPeso());
+        persona.setAltura(pedirAltura());
+
+        return persona;
+    }
+
+    private static String pedirNombre() {
+        System.out.println("¿Como te llamas?");
+        return teclado.nextLine();
+    }
+
+    private static char pedirSexo() {
+        System.out.println("¿Cual es tu sexo?");
+        return teclado.next().toUpperCase().charAt(0);
+    }
+
+    private static int pedirEdad() {
+        int edad = -1;
         do {
             System.out.println("¿Cual es tu edad?");
             try {
                 edad = teclado.nextInt();
-                persona.getEdad();
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("""
                                    %s: El dato introducido no es correcto debe ser un número entero entre 0 y 130
                                    """.formatted(e));
+                teclado.nextLine();
+            }
+            if (edad < 0 || edad > 130) {
+                System.out.println("La edad debe estar comprendida entre 0 y 130");
             }
         } while (edad < 0 || edad > 130);
+        return edad;
+    }
 
-        do {
-            System.out.println("¿Cual es tu sexo?");
-            try {
-                sexo=teclado.next().charAt(0);
-                datoCorrecto=true;
-                persona.setSexo(sexo);
-            } catch (Exception e) {
-                System.out.println("""
-                                   %s: El dato introducido no es correcto debe ser un caracter 
-                                   """.formatted(e));
-            }
-        } while (!datoCorrecto);
-        
+    private static double pedirPeso() {
+        double peso = 0;
         do {
             System.out.println("¿Cual es tu peso?");
             try {
-                peso=teclado.nextDouble();
-                persona.setPeso(peso);
-            } catch (Exception e) {
+                peso = teclado.nextDouble();
+
+            } catch (InputMismatchException e) {
                 System.out.println("""
-                                   %s: El dato introducido no es correcto debe ser un número entre 0 y 300
+                                   %s: El dato introducido no es correcto.
                                    """.formatted(e));
             }
-        } while (peso<0 || peso>300);
-        
+            if (peso < 0 || peso > 300) {
+                System.out.println("El peso debe estar comprendido entre 0 y 300 kg");
+            }
+        } while (peso < 0 || peso > 300);
+        return peso;
+    }
 
+    private static double pedirAltura() {
+        double altura = 0;
+        do {
+            System.out.println("Cual es tu altura en metros");
+            try {
+                altura = teclado.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("""
+                                   %s: El dato introducido no es correcto debe ser un número entre 0.3 y 2.5
+                                   """.formatted(e));
+                teclado.nextLine();
+            }
+            if (altura < 0.3 || altura > 2.5) {
+                System.out.println("La altura debe estar comprendida entre 0.3 - 2.5");
+            }
+        } while (altura < 0.3 || altura > 2.5);
+        return altura;
     }
 
 }
